@@ -2,5 +2,8 @@
 <resources>
     <color name="colorPrimary">#44B61A</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#FFFCFD</color>
+    <color name="colorAccent">#FFEB3B</color>
+
+
+    <color name="backGroundmovieCard">#9444B61A</color>
 </resources>
