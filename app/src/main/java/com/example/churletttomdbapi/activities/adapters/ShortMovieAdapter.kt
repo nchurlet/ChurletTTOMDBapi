@@ -7,18 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.churletttomdbapi.R
 import com.example.churletttomdbapi.activities.DetailsMovieActivity
 import com.example.churletttomdbapi.model.Movie
+import com.example.churletttomdbapi.model.MovieDetails
+import com.example.churletttomdbapi.network.ApiError
+import com.example.churletttomdbapi.network.ApiHelpers
+import com.example.churletttomdbapi.network.ApiRequestCallback
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie_short_card.view.*
 
 
 class ShortMovieAdapter(private val myDataset: MutableList<Movie>)  : RecyclerView.Adapter<ShortMovieAdapter.ShortMovieViewHolder>() {
-
-    var gson = Gson()
 
     class ShortMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val _poster = itemView.item_short_movie_poster
@@ -49,8 +52,27 @@ class ShortMovieAdapter(private val myDataset: MutableList<Movie>)  : RecyclerVi
     ) {
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailsMovieActivity::class.java)
+            val apiHelpers = ApiHelpers(context)
+
+            apiHelpers.getFilmByImdbIDAsync(
+                myDataset[position].imdbID,
+                object : ApiRequestCallback<MovieDetails>() {
+                    override fun onSuccess(result: MovieDetails?) {
+                        super.onSuccess(result)
+
+                        var gson = Gson()
+                        intent.putExtra("MovieData", gson.toJson(result))
+                        context.startActivity(intent)
+                    }
+
+                    override fun onError(error: ApiError?) {
+                        super.onError(error)
+                        Toast.makeText(context, error!!.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
+        }
     }
-    }
+
     private fun bindData(
         holder: ShortMovieViewHolder,
         position: Int,

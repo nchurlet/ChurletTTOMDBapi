@@ -3,6 +3,7 @@ package com.example.churletttomdbapi.network;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.churletttomdbapi.model.MovieDetails;
 import com.example.churletttomdbapi.model.SearchResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -69,6 +70,17 @@ public class ApiHelpers {
         (new ApiRequest<SearchResult>())
                 .requestAsync(
                         apiservice.getFilmsByString(wordInTitle, API_KEY),
+                        callback
+                );
+    }
+
+    public void getFilmByImdbIDAsync (
+            String imdbID,
+            ApiRequestCallback<MovieDetails> callback
+    ) {
+        (new ApiRequest<MovieDetails>())
+                .requestAsync(
+                        apiservice.getFilmByImdbID(imdbID, API_KEY, "full"),
                         callback
                 );
     }
