@@ -29,8 +29,7 @@ class DetailsMovieActivity : AppCompatActivity(){
             .placeholder(R.drawable.ic_local_movies_black_24dp)
             .into(activity_details_movie_poster)
 
-        activity_details_movie_critics_value.rating = movieData.imdbRating.toFloat()
-        activity_details_movie_critics_value.max = 100
+        activity_details_movie_critics_value.rating = (movieData.imdbRating.toFloat() / 2)
 
     }
 }
