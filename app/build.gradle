@@ -41,6 +41,8 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
 
+    // Picasso for internet imageView
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     // UI
     // RecyclerView
