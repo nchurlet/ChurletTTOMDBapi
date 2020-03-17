@@ -12,7 +12,7 @@ import retrofit2.http.Query;
  * Created by Nicolas Churlet on 21/03/2018.
  */
 
-public interface ErpInterventionApiService {
+public interface ErpInterventionApiServiceJ {
     String API_KEY = "246b91a0";
 
     @GET("/?")
