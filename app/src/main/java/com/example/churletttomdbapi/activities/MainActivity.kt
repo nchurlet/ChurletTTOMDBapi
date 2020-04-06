@@ -14,7 +14,7 @@ import com.example.churletttomdbapi.model.Movie
 import com.example.churletttomdbapi.model.SearchResult
 import com.example.churletttomdbapi.network.ApiError
 import com.example.churletttomdbapi.network.ApiHelpers
-import com.example.churletttomdbapi.network.ApiRequestCallback
+import com.example.churletttomdbapi.network.JApiRequestCallback
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -23,19 +23,26 @@ class MainActivity : AppCompatActivity() {
         val TAG = MainActivity::class.java.canonicalName
     }
 
+    // region Variables declaration
     lateinit var apiHelper: ApiHelpers
     lateinit var movies : MutableList<Movie>
     lateinit var movieAdapter : ShortMovieAdapter
+    // endregion Variables declaration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
+
+        // region Variables initialization
         apiHelper = ApiHelpers(this)
         movies = mutableListOf()
         movieAdapter = ShortMovieAdapter(movies)
+        // region RecylerView initialization
         activity_main_short_movie_recycler_view.layoutManager = LinearLayoutManager(this)
         activity_main_short_movie_recycler_view.adapter = movieAdapter
+        // endregion RecylerView initialization
+        // endregion Variables initialization
     }
 
     private fun submitStringToQueryApi(
